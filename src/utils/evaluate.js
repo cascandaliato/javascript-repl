@@ -13,6 +13,7 @@ export default function evaluate(code) {
         return output;
     }
   } catch (e) {
-    return ERROR;
+    // return ERROR;
+    return `ERROR: ${e.message}`;
   }
 }

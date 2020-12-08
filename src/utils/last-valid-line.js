@@ -1,6 +1,6 @@
 import { parse } from "@babel/parser";
 
-export default function maxValidLine(code) {
+export default function lastValidLine(code) {
   let line = 1;
   try {
     for (; line <= code.length; line++) {

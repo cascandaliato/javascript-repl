@@ -14,14 +14,19 @@ export default function enrichCode(cm, change, meta) {
       ([, end], idx, arr) => idx === arr.length - 1 || end < arr[idx + 1][0]
     )
     .map(([, end]) => end)
-    .map((end) => ({
-      line: end,
-      evaluation: JSON.stringify(
+    .map((end) => {
+      const evaluation = JSON.stringify(
         evaluate(code.slice(0, end).join("\n")),
         null,
         2
-      ),
-    }));
+      );
+
+      return {
+        targetLine: end,
+        value: evaluation,
+        numLines: evaluation.split("\n").length,
+      };
+    });
 
   return {
     code: cm.doc.getValue(),
